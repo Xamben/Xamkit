@@ -10,7 +10,7 @@ import Foundation
 
 public class LocalServiceImpl: LocalService{
   
-  public func parsingJSON<T>(of type: T.Type, from data: Data) -> Result<T, NError> where T: Codable{
+  public func parsingJSON<T>(of type: T.Type, from data: Data) -> Result<T, ErrorMessage> where T: Codable{
     do {
       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
       
@@ -22,7 +22,7 @@ public class LocalServiceImpl: LocalService{
       print("parse_error", error)
     }
     
-    return .failure(NError.parseError)
+    return .failure(ErrorMessage(code: -3, description: "Parse Error"))
   }
   
   public func loadJsonFromFile(with url: String) -> Data {
@@ -41,7 +41,7 @@ public class LocalServiceImpl: LocalService{
 
 public class ServiceHelper: LocalService{
   
-  public func parsingJSON<T>(of type: T.Type, from data: Data) -> Result<T, NError> where T : Decodable, T : Encodable {
+  public func parsingJSON<T>(of type: T.Type, from data: Data) -> Result<T, ErrorMessage> where T : Decodable, T : Encodable {
     do {
       let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
       
@@ -52,7 +52,7 @@ public class ServiceHelper: LocalService{
     } catch let error {
       print("parse_error", error)
     }
-    return .failure(.undefinedError)
+    return .failure(ErrorMessage(code: -5, description: "Unknown Error"))
   }
   
   public func loadJsonFromFile(with url: String) -> Data {

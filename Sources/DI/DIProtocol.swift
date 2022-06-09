@@ -1,8 +1,8 @@
 //
 //  DIProtocol.swift
-//  Ilham Hadi Prabawa
+//  Daniel Prastiwa
 //
-//  Created by Ilham Hadi Prabawa on 09/03/22.
+//  Created by Daniel Prastiwa on 09/03/22.
 //  Copyright © 2022 Xamben. All rights reserved.
 //
 

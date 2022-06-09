@@ -16,10 +16,10 @@ public protocol Service {
                            withHeaders headers: HTTPHeaders,
                            withParameter parameters: Parameters,
                            withEncoding encoding: ParameterEncoding?,
-                           completion: @escaping(Result<T, NError>) -> Void)
+                           completion: @escaping(Result<T, ErrorMessage>) -> Void)
 }
 
 public protocol LocalService {
-  func parsingJSON<T>(of type: T.Type, from data: Data) -> Result<T, NError> where T: Codable
+  func parsingJSON<T>(of type: T.Type, from data: Data) -> Result<T, ErrorMessage> where T: Codable
   func loadJsonFromFile(with url: String) -> Data
 }
