@@ -9,6 +9,6 @@
 import Foundation
 
 public protocol CellIdentifier{
-    static var reuseIdentifier: String { get set }
-
+  static var reuseIdentifier: String { get set }
+  
 }
