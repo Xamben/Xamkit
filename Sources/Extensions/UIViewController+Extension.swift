@@ -38,6 +38,50 @@ public extension UIViewController {
         navigationItem.backButtonTitle = ""
     }*/
   
+  // MARK: - Methods
+  public func addFullScreen(childViewController child: UIViewController) {
+    guard child.parent == nil else {
+      return
+    }
+
+    addChild(child)
+    view.addSubview(child.view)
+
+    child.view.translatesAutoresizingMaskIntoConstraints = false
+    let constraints = [
+      view.leadingAnchor.constraint(equalTo: child.view.leadingAnchor),
+      view.trailingAnchor.constraint(equalTo: child.view.trailingAnchor),
+      view.topAnchor.constraint(equalTo: child.view.topAnchor),
+      view.bottomAnchor.constraint(equalTo: child.view.bottomAnchor)
+    ]
+    constraints.forEach { $0.isActive = true }
+    view.addConstraints(constraints)
+
+    child.didMove(toParent: self)
+  }
+
+  public func remove(childViewController child: UIViewController?) {
+    guard let child = child else {
+      return
+    }
+
+    guard child.parent != nil else {
+      return
+    }
+    
+    child.willMove(toParent: nil)
+    child.view.removeFromSuperview()
+    child.removeFromParent()
+  }
+  
+  public func openLink(with url: URL?){
+    if #available(iOS 10.0, *) {
+      UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    } else {
+      UIApplication.shared.openURL(url!)
+    }
+  }
+  
   func addChildController(
     _ child: UIViewController,
     to parentView: UIView? = nil
@@ -62,4 +106,7 @@ public extension UIViewController {
     view.removeFromSuperview()
     removeFromParent()
   }
+  
+  
+  
 }
