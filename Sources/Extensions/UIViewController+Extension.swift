@@ -9,44 +9,44 @@
 import UIKit
 
 public extension UIViewController {
-    
-    /*static func loadFromNib() -> Self {
-        func instantiateFromNib<T: UIViewController>() -> T {
-            return T.init(nibName: String(describing: T.self), bundle: nil)
-        }
-        
-        return instantiateFromNib()
-    }
-    
-    func emptyLayoutSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
-                                              heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0), heightDimension: .fractionalHeight(0))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
-        return NSCollectionLayoutSection(group: group)
-    }
-    
-    func navigationStyle(){
-        let backImage = UIImage(named: "ic_arrow_back")?
-            .withRenderingMode(.alwaysOriginal)
-            .withAlignmentRectInsets(.init(top: 0, left: -10, bottom: 0, right: 0))
-        navigationController?.navigationBar.backIndicatorImage = backImage
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
-        navigationItem.backButtonTitle = ""
-    }*/
+  
+  /*static func loadFromNib() -> Self {
+   func instantiateFromNib<T: UIViewController>() -> T {
+   return T.init(nibName: String(describing: T.self), bundle: nil)
+   }
+   
+   return instantiateFromNib()
+   }
+   
+   func emptyLayoutSection() -> NSCollectionLayoutSection {
+   let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
+   heightDimension: .fractionalHeight(1.0))
+   let item = NSCollectionLayoutItem(layoutSize: itemSize)
+   
+   let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0), heightDimension: .fractionalHeight(0))
+   let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+   
+   return NSCollectionLayoutSection(group: group)
+   }
+   
+   func navigationStyle(){
+   let backImage = UIImage(named: "ic_arrow_back")?
+   .withRenderingMode(.alwaysOriginal)
+   .withAlignmentRectInsets(.init(top: 0, left: -10, bottom: 0, right: 0))
+   navigationController?.navigationBar.backIndicatorImage = backImage
+   navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+   navigationItem.backButtonTitle = ""
+   }*/
   
   // MARK: - Methods
-  public func addFullScreen(childViewController child: UIViewController) {
+  func addFullScreen(childViewController child: UIViewController) {
     guard child.parent == nil else {
       return
     }
-
+    
     addChild(child)
     view.addSubview(child.view)
-
+    
     child.view.translatesAutoresizingMaskIntoConstraints = false
     let constraints = [
       view.leadingAnchor.constraint(equalTo: child.view.leadingAnchor),
@@ -56,15 +56,15 @@ public extension UIViewController {
     ]
     constraints.forEach { $0.isActive = true }
     view.addConstraints(constraints)
-
+    
     child.didMove(toParent: self)
   }
-
-  public func remove(childViewController child: UIViewController?) {
+  
+  func remove(childViewController child: UIViewController?) {
     guard let child = child else {
       return
     }
-
+    
     guard child.parent != nil else {
       return
     }
@@ -74,7 +74,7 @@ public extension UIViewController {
     child.removeFromParent()
   }
   
-  public func openLink(with url: URL?){
+  func openLink(with url: URL?){
     if #available(iOS 10.0, *) {
       UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     } else {
