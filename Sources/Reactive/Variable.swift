@@ -15,7 +15,7 @@ public protocol RxBinding {
 }
 
 extension Observable: RxBinding {
-    // previously defined
+    
 }
 
 public protocol RxBidirectionalBinding: RxBinding {
